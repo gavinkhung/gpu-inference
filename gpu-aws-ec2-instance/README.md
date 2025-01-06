@@ -1,26 +1,86 @@
 # GPU AWS EC2 instance
 
+SSH into a single or multi-GPU EC2 instance.
+
+## Examples
+
+- [single_gpu.py](https://github.com/pytorch/examples/blob/main/distributed/ddp-tutorial-series/single_gpu.py)
+- [multigpu_torchrun.py](https://github.com/pytorch/examples/blob/main/distributed/ddp-tutorial-series/multigpu_torchrun.py)
+
+## Prerequisites
+
+This assumes that the user is logged into AWS, see [Configuring the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+
+```sh
+brew install awscli
+aws configure
+```
+
 ## Create EC2 Instance with Terraform
 
-Create and SSH into instance
+Create EC2 Instance
 
 ```sh
 cd envs/test
-terraform init # downloads aws provider
+terraform init
 terraform plan
 terraform apply -auto-approve
+```
 
+SSH into instance. The username to SSH into will vary depending on the AMI.
+
+```sh
 chmod 400 private-key.pem
 
 ssh ec2-user@PUBLIC_IP -i private-key.pem
+ssh ubuntu@PUBLIC_IP -i private-key.pem
 ```
+
 
 Shutdown the instance
 
 ```sh
 sudo umount /mnt/data
+exit
 
 terraform destroy
+```
+
+## Verify GPU and Cuda
+
+Check NVIDIA GPU existence/usage
+
+```sh
+nvidia-smi
+```
+
+Check Cuda installation
+
+```sh
+nvcc --version
+```
+
+Verify Cuda is accessible in PyTorch and Docker can access GPUs. Look at the latest Docker PyTorch images [here](https://hub.docker.com/r/pytorch/pytorch/tags)
+
+```sh
+docker pull pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+docker run --gpus all --rm pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime python3 -c "import torch; print('CUDA available:', torch.cuda.is_available()); print('Device count:', torch.cuda.device_count())"
+```
+
+The commands assume that the [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) is installed in the AMI. If they aren't already there, follow the commands on their installation guide to allow Docker to access GPUs.
+
+## Move Data to EC2
+
+```sh
+mkdir local_dataset_dir
+echo "hello" > local_dataset_dir/a.txt
+scp -i private-key.pem -r local_dataset_dir/ ubuntu@PUBLIC_IP:/home/ubuntu/data
+```
+
+## Move Data from EC2
+
+```sh
+scp -r -i private-key.pem ubuntu@PUBLIC_IP:/home/ubuntu/data/ remote_dataset_dir/
 ```
 
 ## Mounting the EBS volume

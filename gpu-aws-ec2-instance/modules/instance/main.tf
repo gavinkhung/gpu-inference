@@ -83,9 +83,7 @@ resource "aws_vpc_security_group_egress_rule" "instance_egress_rule" {
   security_group_id = aws_security_group.instance_security_group.id
 
   cidr_ipv4   = "0.0.0.0/0"
-  from_port   = 0
   ip_protocol = -1
-  to_port     = 0
 
   tags = {
     Name = "${var.env_name}_${var.instance_name}_security_group_egress"
