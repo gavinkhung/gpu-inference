@@ -13,8 +13,8 @@ More information about the parallel cluster CLI is [here](https://docs.aws.amazo
 ```sh
 cd envs/test
 python3 -m pip install --user --upgrade virtualenv
-python3 -m virtualenv cluster
-source cluster/bin/activate
+python3 -m virtualenv venv
+source venv/bin/activate
 
 pip3 install awscli
 pip3 install aws-parallelcluster

@@ -1,6 +1,7 @@
 Region: us-east-1
 Image:
-  Os: alinux2
+  Os: ubuntu2004
+  CustomAmi: ami-02b2bc6ac36a726a9
 HeadNode:
   InstanceType: c5.xlarge
   Networking:
@@ -14,7 +15,7 @@ Scheduling:
     ComputeResources:
     - Name: p32xlarge
       Instances:
-      - InstanceType: p3.2xlarge
+      - InstanceType: p4d.24xlarge
       MinCount: 0
       MaxCount: 3
     Networking:

@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "instance" {
-  source = "./modules/key-pair"
+  source = "../../modules/key-pair"
 
   key_name = "pcluster_key_pair"
 }

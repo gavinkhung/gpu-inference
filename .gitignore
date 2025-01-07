@@ -41,5 +41,4 @@ terraform.rc
 
 *.pem
 
-**/venv/*
-**/cluster-config.yaml
+.terraform.lock.hcl
