@@ -9,7 +9,7 @@ output "instance_public_ip" {
 }
 
 output "private_key_read_permission_command" {
-  value = "chmod 400 private-key.pem"
+  value = "chmod 400 ${local_file.instance_private_key_pem.filename}"
 }
 
 output "instance_ssh_command" {

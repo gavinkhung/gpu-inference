@@ -98,7 +98,7 @@ resource "tls_private_key" "rsa_private_key" {
 
 resource "local_file" "instance_private_key_pem" {
   content  = tls_private_key.rsa_private_key.private_key_pem
-  filename = "private-key.pem"
+  filename = var.key_filename
 }
 
 resource "aws_key_pair" "instance_key_pair" {

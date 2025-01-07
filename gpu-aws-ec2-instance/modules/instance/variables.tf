@@ -18,6 +18,11 @@ variable "ebs_size_gb" {
   type    = number
 }
 
+variable "key_filename" {
+  default = "private-key.pem" 
+  type    = string
+}
+
 variable "instance_ami" {
   default = "amzn2-ami-hvm-*-x86_64-gp2"
   type    = string

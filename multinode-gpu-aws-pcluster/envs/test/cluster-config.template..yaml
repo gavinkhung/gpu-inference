@@ -1,0 +1,22 @@
+Region: us-east-1
+Image:
+  Os: alinux2
+HeadNode:
+  InstanceType: c5.xlarge
+  Networking:
+    SubnetId: subnet-XXXXXXXXXXX
+  Ssh:
+    KeyName: pcluster_key_pair
+Scheduling:
+  Scheduler: slurm
+  SlurmQueues:
+  - Name: queue1
+    ComputeResources:
+    - Name: p32xlarge
+      Instances:
+      - InstanceType: p3.2xlarge
+      MinCount: 0
+      MaxCount: 3
+    Networking:
+      SubnetIds:
+      - subnet-XXXXXXXXXXX
