@@ -7,8 +7,6 @@
 #SBATCH --output=mpi_test_%j.out
 #SBATCH --error=mpi_test_%j.err
 
-# Load MPI module (adjust this based on your cluster's configuration)
 module load openmpi
 
-# Run the MPI program
 mpirun -n 2 ./broadcast

@@ -1,6 +1,6 @@
 # AWS Sagemaker Notebook
 
-Create a Jupyter notebook instance on AWS Sagemaker
+Create a Jupyter notebook instance on AWS Sagemaker and a S3 bucket to house data. Training jobs on Sagemaker read in and output data using AWS S3 Buckets. 
 
 ## Prerequisites
 
