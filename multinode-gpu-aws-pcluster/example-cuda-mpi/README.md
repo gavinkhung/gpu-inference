@@ -1,6 +1,6 @@
 # CUDA + MPI Example
 
-Run Multi-Node GPU CUDA node, allowing for distributed workloads.
+Run Multi-Node GPU CUDA code, allowing for distributed workloads.
 
 This assumes that all of the compute nodes have a GPU and CUDA installed.
 

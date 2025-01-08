@@ -1,6 +1,6 @@
 # AWS Sagemaker Notebook
 
-Create a Jupyter notebook instance on AWS Sagemaker and a S3 bucket to house data. Training jobs on Sagemaker read in and output data using AWS S3 Buckets. 
+Create a Jupyter notebook instance on AWS Sagemaker and a S3 bucket to house data. Training jobs on Sagemaker read in and output data using AWS S3 Buckets.
 
 ## Prerequisites
 
@@ -28,4 +28,34 @@ Shutdown the notebook
 
 ```sh
 terraform destroy
+```
+
+## Upload Files to S3 Bucket
+
+```sh
+cd /home/ec2-user/SageMaker/
+
+aws s3 cp file.txt s3://bucket-name/dir/
+
+# upload whole dir to S3 bucket
+aws s3 cp local_dir/ s3://bucket-name/dir/ --recursive
+
+# sync a local dir with a dir in a S3 bucket. uploads necessary files
+aws s3 sync local_dir/ s3://bucket-name/dir/
+```
+
+## Download Files from S3 Bucket
+
+```sh
+cd /home/ec2-user/SageMaker/
+
+aws s3 ls s3://bucket-name/dir/
+
+aws s3 cp s3://bucket-name/remote_file.txt file.txt
+
+# download whole dir in S3 bucket
+aws s3 cp s3://bucket-name/dir/ local_dir/ --recursive
+
+# sync a S3 bucket dir with a local dir. downloads necessary files
+aws s3 sync s3://bucket-name/dir/ local_dir/
 ```

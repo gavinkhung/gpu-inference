@@ -8,5 +8,6 @@ module "notebook" {
   instance_type = "ml.t3.medium"
   # instance_type = "ml.p3.2xlarge"
 
-  notebook_name = "instance"
+  # only alphanumeric characters and hyphens
+  notebook_name = "dev-instance"
 }

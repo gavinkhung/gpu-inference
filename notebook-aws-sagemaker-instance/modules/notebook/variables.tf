@@ -7,3 +7,8 @@ variable "notebook_name" {
   default = "instance"
   type    = string
 }
+
+variable "notebook_volume_size" {
+  default = 32
+  type    = number
+}
