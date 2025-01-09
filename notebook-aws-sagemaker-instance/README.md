@@ -26,6 +26,9 @@ Navigate to the notebook url in the terraform output.
 
 Shutdown the notebook
 
+As a safety measure, you have to manually make sure that the bucket is empty before deleting it, including all of the versions of each file.
+Click [here for the AWS Console](https://us-west-1.console.aws.amazon.com/s3/buckets?region=us-west-1&bucketType=general)
+
 ```sh
 terraform destroy
 ```

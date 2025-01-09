@@ -27,6 +27,12 @@ terraform plan
 terraform apply -auto-approve
 ```
 
+It might take some time to initialize. This must complete before you can SSH into the instance.
+
+```sh
+aws ec2 describe-instance-status --instance-ids i-1234567890abcdef0
+```
+
 SSH into instance. The username to SSH into will vary depending on the AMI.
 
 ```sh

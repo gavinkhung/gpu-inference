@@ -90,9 +90,8 @@ resource "aws_s3_bucket_policy" "notebook_bucket_sagemaker_policy" {
 }
 
 # allow specific sagemaker roles to access the s3 bucket
-resource "aws_iam_role_policy" "notebook_bucket_s3_policy" {
+resource "aws_iam_policy" "notebook_bucket_s3_policy" {
   name = "${aws_s3_bucket.notebook_bucket.id}_sagemaker_access"
-  role = aws_iam_role.sagemaker_role.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -112,4 +111,9 @@ resource "aws_iam_role_policy" "notebook_bucket_s3_policy" {
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "sagemaker_policy_attach" {
+  role = aws_iam_role.sagemaker_role.name
+  policy_arn = aws_iam_policy.notebook_bucket_s3_policy.arn
 }
